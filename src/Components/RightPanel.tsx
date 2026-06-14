@@ -1,6 +1,8 @@
 import {Plus , ChevronRight} from 'lucide-react'
 import { useIsMobile } from '../hooks/useMediaQuery'
 import { useUIStore } from '../stores/uistore'
+import { useApps } from '../hooks/useApps'
+import CardUI from './CardUi'
 
 
 export default function RightPanel(){
@@ -8,9 +10,56 @@ export default function RightPanel(){
 
     const isMobile = useIsMobile()
     const { isDrawerOpen, closeDrawer } = useUIStore()
+    const {selectedAppId , setSelectedAppId} = useUIStore()
 
 
 
+    const {data:apps , isLoading , isError} = useApps()
+
+
+
+
+    const AppList = () => {
+
+            if(isLoading)
+
+                return(
+                    <div className="flex items-center justify-center h-full text-zinc-300 text-sm">
+                        Loading Apps ...
+                    </div>
+                
+                )
+             if (isError) return (
+            <div className="flex items-center justify-center h-full text-red-400 text-sm">
+                Failed to load apps!
+            </div>
+             )
+
+      return (
+      <ul className="overflow-y-auto h-full">
+        {apps?.map((app) => (
+          <li
+            key={app.id}
+            onClick={() => setSelectedAppId(app.id)}        // ← on click saves to Zustand
+            className={`py-2 pl-2 mt-3 mr-3 ml-3 cursor-pointer flex flex-row justify-between items-center
+              ${selectedAppId === app.id ? 'bg-white/10 rounded-xl mr-3 ml-3' : ''}  
+            `}                                               // ← highlight selected app
+          >
+            <div className="flex items-center gap-2">
+              {/* color dot comes from mockApi data */}
+              <div
+                className="w-2 h-2 rounded-full"
+                style={{ background: app.color }}           // ← real color from mockApi
+              />
+              {app.name}                                    
+            </div>
+            <ChevronRight  size={13} className="mr-4"/>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+            
     if(!isMobile){
         return(
             <aside className="bg-zinc-800 h-full  overflow-y-hidden" style={{width:'20%' , position:'fixed' , top:'7.9%' , right:'0px'}}>
@@ -27,40 +76,7 @@ export default function RightPanel(){
 
                     <div className="bg-black/25  overflow-y-auto scrollbar-visible h-full rounded-2xl mt-10 flex flex-col mx-2 mb-2 font-serif "   >
                     {/* Created  a unordered list to store the app names */}
-                        <ul className=" overflow-y-auto h-full">
-
-                            <li className="py-2  pl-2  mt-3  cursor-pointer flex flex-row justify-between items-center">
-                                {/* App name with a blue dot that it is fetched */}
-                                <div className="flex items-center gap-2">
-                                     <div className="w-2 h-2 bg-blue-400 rounded-full " />   First Token 
-                                </div>
-                                {/* Right arrow icon */}
-                                  <ChevronRight />
-                            </li>
-                             <li className="py-2  pl-2  mt-3   cursor-pointer flex flex-row justify-between">
-                                <div className="flex items-center gap-2">
-                                     <div className="w-2 h-2 bg-red-400 rounded-full " />   Second Token 
-                                </div>
-                                {/* Right arrow icon */}
-                                  <ChevronRight />
-                            </li>
-                             <li className="py-2  pl-2  mt-3  cursor-pointer flex flex-row justify-between">
-                                <div className="flex items-center gap-2">
-                                     <div className="w-2 h-2 bg-yellow-400 rounded-full " />   Third Token 
-                                </div>
-                                {/* Right arrow icon */}
-                                  <ChevronRight />
-                            </li>
-                             <li className="py-2  pl-2  mt-3   cursor-pointer  flex flex-row justify-between">
-                               <div className="flex items-center gap-2">
-                                     <div className="w-2 h-2 bg-green-400 rounded-full " />   Forth Token 
-                                </div>
-                                {/* Right arrow icon */}
-                                  <ChevronRight />
-                            </li>
-                            
-                        </ul>
-
+                       <AppList />
 
                     </div>
                     {/* ---------------end of the app list scrollable section ----------------- */}
@@ -84,7 +100,7 @@ export default function RightPanel(){
             {/* node inspector panel here the card will be appear this section */}
                 <div className="bg-white/10 rounded-2xl mt-10 ml-2  mr-2 mb-10 flex items-center justify-center font-serif text-white/10"  style={{height:'45vh'}}>
 
-                                Node Inspector section
+                                <CardUI />
                                 
                 </div>
 
@@ -111,7 +127,7 @@ export default function RightPanel(){
             className="bg-zinc-800 h-full w-80 ml-auto p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 mt-20">
               <h2 className="text-white font-serif">Menu</h2>
               <button 
                 onClick={closeDrawer}
@@ -122,19 +138,9 @@ export default function RightPanel(){
             </div>
             
             {/* Mobile App Selector */}
-            <div className="bg-white/10 rounded-2xl p-3 mb-4">
+            <div className="bg-white/10 rounded-2xl p-3 mb-4 ">
               <div className="text-zinc-300 font-serif mb-2">Apps</div>
-              <ul>
-                <li className="py-2 flex items-center gap-2 text-zinc-200">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full" /> First Token
-                </li>
-                <li className="py-2 flex items-center gap-2 text-zinc-200">
-                  <div className="w-2 h-2 bg-red-400 rounded-full" /> Second Token
-                </li>
-                <li className="py-2 flex items-center gap-2 text-zinc-200">
-                  <div className="w-2 h-2 bg-yellow-400 rounded-full" /> Third Token
-                </li>
-              </ul>
+                    <AppList />
             </div>
             
             {/* Mobile Node Inspector */}
