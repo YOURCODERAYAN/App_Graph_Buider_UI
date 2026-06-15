@@ -7,6 +7,8 @@ export default function ServiceNode({data , id} : any){
 
     const{setSelectedNode} = useUIStore()
 
+   
+
 
     const statusColor = data.status === 'Healthy' ? '#22c55e':
         data.status === 'Degraded' ? '#eab308':
@@ -40,6 +42,7 @@ export default function ServiceNode({data , id} : any){
 
                 />
                          <div
+              className="active:border-2  border-white rounded-"
         onClick={() => setSelectedNode({ id, data })}
         style={{
           background: '#1c1c22',
@@ -51,6 +54,7 @@ export default function ServiceNode({data , id} : any){
           display: 'flex',
           flexDirection: 'column',
           gap: '8px',
+          
         }}
       >
 

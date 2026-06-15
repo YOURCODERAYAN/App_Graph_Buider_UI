@@ -48,7 +48,7 @@ export default function RightPanel(){
             <div className="flex items-center gap-2">
               {/* color dot comes from mockApi data */}
               <div
-                className="w-2 h-2 rounded-full"
+                className="w-2 h-2 rounded-full pr-5"
                 style={{ background: app.color }}           // ← real color from mockApi
               />
               {app.name}                                    
@@ -131,7 +131,8 @@ export default function RightPanel(){
               <h2 className="text-white font-serif">Menu</h2>
               <button 
                 onClick={closeDrawer}
-                className="text-white text-xl"
+                className="text-white text-xl cursor-pointer"
+                
               >
                 ✕
               </button>
@@ -139,7 +140,7 @@ export default function RightPanel(){
             
             {/* Mobile App Selector */}
             <div className="bg-white/10 rounded-2xl p-3 mb-4 ">
-              <div className="text-zinc-300 font-serif mb-2">Apps</div>
+              <div className="text-zinc-300 font-serif mb-1">Apps</div>
                     <AppList />
             </div>
             
@@ -147,7 +148,7 @@ export default function RightPanel(){
             <div className="bg-white/10 rounded-2xl p-3">
               <div className="text-zinc-300 font-serif mb-2">Node Inspector</div>
               <div className="text-zinc-500 text-center py-4">
-                Click a node to see details
+                  <CardUI />
               </div>
             </div>
           </div>
