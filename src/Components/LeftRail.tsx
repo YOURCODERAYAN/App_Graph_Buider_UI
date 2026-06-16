@@ -33,16 +33,16 @@ export default function LeftRail(){
          {
             isMobile && (
 
-         <nav className=" bg-zinc-800 h-screen" style={{width:'60px' , position:'fixed' , top:'7.3%', zIndex:'20'}}>   {/* Parent container */}
+         <nav className=" bg-zinc-800 h-screen" style={{width:'40px' , position:'fixed', top:'3%', zIndex:'20'}}>   {/* Parent container */}
 
                   {/* icons container */}
                   <div className="flex flex-col items-center gap-10 pt-9">
 
-                <FaGithub size={35} color="#ffffff" className="cursor-pointer"/>
-                <FaPython  size={35} color="#ffffff" className="cursor-pointer"/>
-                <BiLogoPostgresql  size={35} color="#ffffff" className="cursor-pointer"/>
-                <DiRedis size={35} color="#ffffff" className="cursor-pointer"/>
-                <SiMongodb  size={35} color="#ffffff"  className="cursor-pointer"/>
+                <FaGithub size={20} color="#ffffff" className="cursor-pointer"/>
+                <FaPython  size={20} color="#ffffff" className="cursor-pointer"/>
+                <BiLogoPostgresql  size={20} color="#ffffff" className="cursor-pointer"/>
+                <DiRedis size={20} color="#ffffff" className="cursor-pointer"/>
+                <SiMongodb  size={20} color="#ffffff"  className="cursor-pointer"/>
                
                </div>
             </nav>
