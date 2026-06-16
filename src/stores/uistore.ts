@@ -29,7 +29,11 @@ interface UIState {
 
     edges:any[],
     setEdges : (edges: any[] | null) => void,
-    deleteNode : (id:string) => void 
+    deleteNode : (id:string) => void ,
+
+
+    fitTriggerView : number
+    triggerFitView : ()=> void
 
 
 
@@ -86,7 +90,13 @@ export const useUIStore = create<UIState>((set) => ({
         nodes: state.nodes.filter((node: any) => node.id !== id),
         edges: state.edges.filter((edge: any) => edge.source !== id && edge.target !== id),
         selectedNode: null,
+    })),
+
+    fitTriggerView: 0,
+    triggerFitView: () => set((state) => ({
+        fitTriggerView: state.fitTriggerView + 1
     }))
+    
 
 
 

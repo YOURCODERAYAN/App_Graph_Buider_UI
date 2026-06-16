@@ -9,28 +9,44 @@ export default function Home(){
 
                 <section className="w-full h-screen overflow-y-auto overflow-x-auto  text-white">
                                
-            <div className="top-nav-bar">
-                <Navbar />
-            </div>
+  
 
+  <div style={{ 
+    display: 'flex', 
+    flexDirection: 'column', 
+    height: '100vh', 
+    overflow: 'hidden' 
+  }}>
+    
+    {/* Top Navbar */}
+    <div style={{ flexShrink: 0, zIndex: 50 }}>
+      <Navbar />
+    </div>
 
+    {/* Bottom section — Rail + Canvas + RightPanel */}
+    <div style={{ 
+      display: 'flex', 
+      flex: 1, 
+      overflow: 'hidden' 
+    }}>
+      
+      {/* Left Rail */}
+      <div style={{ flexShrink: 0, zIndex: 40 }}>
+        <LeftRail />
+      </div>
 
-            <div className="left-rail-bar">
-            <LeftRail />
-            </div>
+      {/* Canvas — takes remaining space */}
+      <div style={{ flex: 1, overflow: 'hidden' }}>
+        <Canvas />
+      </div>
 
+      {/* Right Panel */}
+      <div style={{ flexShrink: 0, zIndex: 40 }}>
+        <RightPanel />
+      </div>
 
-
-
-            <div className="absolute inset-0">  {/* Remove -z-1 */}
-                 <Canvas />
-            </div>
-
-
-            <div className="right-panel">
-                <RightPanel />
-            </div>
-
+    </div>
+  </div>
 
 
 

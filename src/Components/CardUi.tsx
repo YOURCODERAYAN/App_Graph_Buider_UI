@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import { useUIStore } from '../stores/uistore';
 import { useIsMobile } from '../hooks/useMediaQuery';
-
+import {X} from 'lucide-react'
 
 
 
@@ -16,11 +16,11 @@ export default function CardUI(){
 
     const isMobile = useIsMobile()
 
-    const {selectedNode , updateNode} = useUIStore()
-    const {deleteNode} = useUIStore()
+    const {selectedNode , updateNode , setSelectedNode} = useUIStore()
+    
 
 
-    const [activeTab , setActiveTab] = useState("")
+    const [activeTab , setActiveTab] = useState("Config")
 
 
 
@@ -40,6 +40,7 @@ export default function CardUI(){
     const tags = data?.tags[0] ?? '';
     const tags2 = data?.tags[1] ?? '';
     const Des = data?.description ?? '';
+    const Cpu = data?.cpu ?? '';
 
 
 
@@ -76,8 +77,8 @@ export default function CardUI(){
 
                                     </div>
 
-                                    <div className="text-white font-semibold">
-                                        X
+                                    <div className="text-white font-semibold cursor-pointer" onClick={()=> setSelectedNode(null)}>
+                                        <X size={20}/>
                                     </div>
                             </div>
                         
@@ -123,6 +124,7 @@ export default function CardUI(){
                                     Tags={tags}
                                     Tags2={tags2}
                                     Des={Des}
+                                    Cpu={Cpu}
                                     updateNode={updateNode}
                                     nodeId={selectedNode.id}
                                 />
@@ -134,7 +136,9 @@ export default function CardUI(){
                             activeTab === 'Runtime' && (
 
 
-                                    <CardExtra />
+                                    <CardExtra
+                                   Cpu={Cpu} 
+                                    />
                             )
                         }
 
@@ -162,8 +166,8 @@ export default function CardUI(){
 
                                     </div>
 
-                                    <div className="text-white font-semibold">
-                                        X
+                                    <div className="text-white font-semibold cursor-pointer" onClick={()=> setSelectedNode(null) }>
+                                        <X  size={20}/>
                                     </div>
                             </div>
                         
@@ -209,6 +213,7 @@ export default function CardUI(){
                                     Tags={tags}
                                     Tags2={tags2}
                                     Des={Des}
+                                    Cpu={Cpu}
                                     updateNode={updateNode}
                                     nodeId={selectedNode.id}
                                 />
@@ -220,7 +225,9 @@ export default function CardUI(){
                             activeTab === 'Runtime' && (
 
 
-                                    <CardExtra />
+                                    <CardExtra
+                                  Cpu={Cpu}  
+                                    />
                             )
                         }
 
@@ -236,7 +243,7 @@ export default function CardUI(){
 
 
 
-export function CardInfo({ First, Tags, Tags2, Des, updateNode, nodeId }: { First: string; Tags: string; Tags2: string; Des: string; updateNode: (id: string, newData: any) => void; nodeId: string }) {
+export function CardInfo({ First, Tags, Tags2, Des, Cpu ,  updateNode, nodeId }: { First: string; Tags: string; Tags2: string; Des: string; Cpu : number; updateNode: (id: string, newData: any) => void; nodeId: string }) {
 
     
 
@@ -246,7 +253,7 @@ export function CardInfo({ First, Tags, Tags2, Des, updateNode, nodeId }: { Firs
 
             return(
 
-                    <div className="bg-zinc-800 w-full  flex flex-col items-center px-1.5 py-1.5 rounded-lg mt-2" style={{height:'28vh'}}>
+                    <div className="bg-zinc-800 w-full  flex flex-col  px-1.5 py-1.5 rounded-lg mt-2" style={{height:'28vh'}}>
                                 <div className="flex items-start  flex-col  w-full">
                                     <label className="text-zinc-400 text-sm">Node Name</label>    
                                     <input
@@ -285,6 +292,32 @@ export function CardInfo({ First, Tags, Tags2, Des, updateNode, nodeId }: { Firs
                                 
 
                             </div>
+
+
+                        <div className="flex flex-col  gap-1">
+                         
+                            <label className="text-white">Cpu Limit:</label>
+                               <div className="flex items-center  gap-7 flex-row ">
+
+                                <input 
+                            type="range" min={0} max={100}
+                            value={Cpu}
+                            onChange ={(e)=> updateNode(nodeId , {cpu: +e.target.value})}
+                            className="accent-violet-600 mr-4 cursor-pointer"
+                            style={{width:'60%'}}
+                                
+                                />
+
+
+                                <input 
+                            type="number" min={0} max={100}
+                            onChange={(e)=> updateNode(nodeId , {cpu: +e.target.value})}
+                            value={Cpu}
+                            className="w-20 border py-1 text-white pl-3 rounded-lg border-white "
+                                
+                                />
+                            </div>
+                        </div>
                                     
                     </div>
             )
@@ -296,7 +329,7 @@ export function CardInfo({ First, Tags, Tags2, Des, updateNode, nodeId }: { Firs
 
 
 
-export function CardExtra(){
+export function CardExtra({Cpu} : {Cpu:number}){
 
         return(
 
@@ -304,8 +337,10 @@ export function CardExtra(){
                             {/* First container */}
                                 <div className="grid grid-cols-2 grid-rows-2 w-full gap-4 ">
 
-                                    <div className="bg-white text-black text-center rounded-lg" style={{height:'7vh'}}>
-                                            hello
+                                    <div className="bg-white text-black flex flex-col items-center text-center rounded-lg" style={{height:'7vh'}}>
+                                       <span className="text-amber-600 text-2xl font-semibold"> {Cpu} %   </span>  
+                                       <span className="text-zinc-500 text-sm font-light">Cpu Percentage</span> 
+
                                     </div>
 
                                     <div className="bg-white flex flex-col items-center text-black text-center rounded-lg">
@@ -326,6 +361,44 @@ export function CardExtra(){
 
 
                                 </div>
+
+
+
+                    <div className="flex flex-col w-full  mt-3 rounded-lg">
+                        <label className="text-zinc-500 font-light text-xs">CPU Usage:{Cpu}%</label>
+
+                        <div className="flex items-end  mt-5 gap-0.5 " style={{height:'40px' }}>
+                            {
+                                Array.from({length:20} , (_ , i) => (
+
+                                        <div
+                                    key={i}
+                                    style={{
+                                        flex:1,
+                                        height:`${Math.max(5 , Math.random() * Cpu)}%`,
+                                        background:
+                                            Cpu > 80 ? '#ef4444':
+                                            Cpu > 60 ? '#eab308' : 
+                                            '#22c55e',
+                                        borderRadius: '2px',
+                                        transition:'height 0.3s ease',
+
+                                    }}
+                                />
+                                ))
+                            }
+                        </div>
+
+
+
+
+                    </div>
+
+                        
+                        
+
+
+
                 </div>
 
         )

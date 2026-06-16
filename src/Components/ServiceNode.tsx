@@ -42,7 +42,7 @@ export default function ServiceNode({data , id} : any){
 
                 />
                          <div
-              className="active:border-2  border-white rounded-"
+              
         onClick={() => setSelectedNode({ id, data })}
         style={{
           background: '#1c1c22',
@@ -126,6 +126,8 @@ export default function ServiceNode({data , id} : any){
               {tag}
             </span>
           ))}
+
+          <span className="text-sm text-cyan-400   bg-zinc-500 px-3 rounded-lg border border-white/20 ">{data.cpu}</span>
         </div>
 
       </div>
