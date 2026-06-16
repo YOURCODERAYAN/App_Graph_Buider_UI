@@ -33,7 +33,7 @@ export default function LeftRail(){
          {
             isMobile && (
 
-         <nav className=" bg-zinc-800 h-screen" style={{width:'40px' , position:'fixed', top:'7%', zIndex:'20'}}>   {/* Parent container */}
+         <nav className=" bg-zinc-800 h-screen" style={{width:'40px' , position:'fixed', top:'5%', zIndex:'20'}}>   {/* Parent container */}
 
                   {/* icons container */}
                   <div className="flex flex-col items-center gap-10 pt-9">
