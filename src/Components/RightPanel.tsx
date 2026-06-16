@@ -117,7 +117,7 @@ export default function RightPanel(){
       {/* Drawer overlay - shows when isDrawerOpen is true */}
       {isDrawerOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-50"
+          className="fixed inset-0 bg-black/50 z-50 h-screen"
           onClick={closeDrawer}
         >
           <div 
