@@ -69,7 +69,7 @@ export default function Navbar(){
 
 
                 {/*Right Side Portion */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center flex-row gap-3">
                   <button className="bg-zinc-600 rounded-full">  <Plus size={15} />  </button>
                   <button 
                     onClick={toggleDrawer}
