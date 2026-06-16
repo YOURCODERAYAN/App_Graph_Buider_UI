@@ -78,7 +78,7 @@ export default function Navbar(){
                     <Menu size={24} className="text-white" />
                   </button>
                   
-                  <button className="bg-zinc-400 px-2 font-semibold py-1 rounded-2xl cursor-pointer flex items-center   text-sm " onClick={triggerFitView}> <Plus className="text-sm" />Fit</button>
+                
 
                 </div>
 
