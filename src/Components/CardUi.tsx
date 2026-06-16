@@ -153,7 +153,7 @@ export default function CardUI(){
         return(
 
                                   //  {/* main-container */}
-                <div className="bg-zinc-900  w-full flex flex-col items-center rounded-xl  px-2" style={{height:'30vh' }}>
+                <div className="bg-zinc-900  w-full flex flex-col items-center rounded-xl  px-2" style={{height:'60vh' }}>
 
                         {/*first nodename tab with node icon*/}
                             <div className="flex items-center justify-between w-full py-1">
@@ -253,7 +253,7 @@ export function CardInfo({ First, Tags, Tags2, Des, Cpu ,  updateNode, nodeId }:
 
             return(
 
-                    <div className="bg-zinc-800 w-full  flex flex-col  px-1.5 py-1.5 rounded-lg mt-2" style={{height:'30vh'}}>
+                    <div className=" w-full  flex flex-col  px-1.5 py-1.5 rounded-lg mt-2" style={{height:'30vh'}}>
                                 <div className="flex items-start  flex-col  w-full">
                                     <label className="text-zinc-400 text-sm">Node Name</label>    
                                     <input
@@ -333,7 +333,7 @@ export function CardExtra({Cpu} : {Cpu:number}){
 
         return(
 
-                <div className="bg-zinc-800 flex flex-col items-center w-full px-1.5 py-1.5 mt-2 rounded-lg" style={{height:'28vh'}}>
+                <div className=" flex flex-col items-center w-full px-1.5 py-1.5 mt-2 rounded-lg" style={{height:'28vh'}}>
                             {/* First container */}
                                 <div className="grid grid-cols-2 grid-rows-2 w-full gap-4 ">
 
