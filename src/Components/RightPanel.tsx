@@ -117,11 +117,11 @@ export default function RightPanel(){
       {/* Drawer overlay - shows when isDrawerOpen is true */}
       {isDrawerOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 z-50 h-screen overflow-y-auto"
+          className="fixed inset-0 bg-black/50 z-50"
           onClick={closeDrawer}
         >
           <div 
-            className="bg-zinc-800 h-full w-80 ml-auto p-4"
+            className="bg-zinc-800 h-screen overflow-y-auto w-80 ml-auto p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4 mt-20">
