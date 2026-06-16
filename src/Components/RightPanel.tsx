@@ -37,7 +37,7 @@ export default function RightPanel(){
 
       return (
       <ul className="overflow-y-auto h-full">
-        {apps?.map((app) => (
+        {apps?.map((app: any) => (
           <li
             key={app.id}
             onClick={() => setSelectedAppId(app.id)}        // on click saves to Zustand
