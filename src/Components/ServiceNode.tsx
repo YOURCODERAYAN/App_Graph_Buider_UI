@@ -5,7 +5,7 @@ import { Handle, Position } from 'reactflow'
 
 export default function ServiceNode({data , id} : any){
 
-    const{setSelectedNode} = useUIStore()
+  const{setSelectedNode, selectedNode} = useUIStore()
 
    
 
@@ -25,9 +25,11 @@ export default function ServiceNode({data , id} : any){
     '#ef4444'
 
 
+      const isSelected = selectedNode?.id === id
+
         return(
 
-            <>
+          <>
                 <Handle
                 type="target"
                 position={Position.Left}
@@ -42,11 +44,11 @@ export default function ServiceNode({data , id} : any){
 
                 />
                          <div
-              
+                
         onClick={() => setSelectedNode({ id, data })}
         style={{
           background: '#1c1c22',
-          border: '1.5px solid #2e2e3a',
+          border: isSelected ? '2px solid #ffffff' : '1.5px solid #2e2e3a',
           borderRadius: '10px',
           padding: '12px 14px',
           minWidth: '180px',
@@ -54,6 +56,7 @@ export default function ServiceNode({data , id} : any){
           display: 'flex',
           flexDirection: 'column',
           gap: '8px',
+          boxShadow: isSelected ? '0 0 0 4px rgba(255,255,255,0.06)' : undefined,
           
         }}
       >
