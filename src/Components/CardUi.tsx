@@ -64,7 +64,7 @@ export default function CardUI(){
 
             
               //  {/* main-container */}
-                <div className="bg-zinc-900  w-full flex flex-col items-center rounded-xl mx-3 px-2" style={{height:'30vh' }}>
+                <div className="bg-zinc-900  w-full flex flex-col items-center rounded-xl mx-3 px-2" style={{height:'20vh' }}>
 
                         {/*first nodename tab with node icon*/}
                             <div className="flex items-center justify-between w-full py-1">
