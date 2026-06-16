@@ -70,6 +70,7 @@ export default function Navbar(){
 
                 {/*Right Side Portion */}
                 <div className="flex items-center gap-3">
+                    <Plus size={15} />
                   <button 
                     onClick={toggleDrawer}
                     className="bg-zinc-700 hover:bg-zinc-600 p-2 rounded-lg cursor-pointer transition-colors"
