@@ -1,4 +1,4 @@
-import {Plus , ChevronRight} from 'lucide-react'
+import { ChevronRight} from 'lucide-react'
 import { useIsMobile } from '../hooks/useMediaQuery'
 import { useUIStore } from '../stores/uistore'
 import { useApps } from '../hooks/useApps'
@@ -40,16 +40,16 @@ export default function RightPanel(){
         {apps?.map((app) => (
           <li
             key={app.id}
-            onClick={() => setSelectedAppId(app.id)}        // ← on click saves to Zustand
+            onClick={() => setSelectedAppId(app.id)}        // on click saves to Zustand
             className={`py-2 pl-2 mt-3 mr-3 ml-3 cursor-pointer flex flex-row justify-between items-center
               ${selectedAppId === app.id ? 'bg-white/10 rounded-xl mr-3 ml-3' : ''}  
-            `}                                               // ← highlight selected app
+            `}                                               //  highlight selected app
           >
             <div className="flex items-center gap-2">
               {/* color dot comes from mockApi data */}
               <div
                 className="w-2 h-2 rounded-full pr-5"
-                style={{ background: app.color }}           // ← real color from mockApi
+                style={{ background: app.color }}           //  real color from mockApi
               />
               {app.name}                                    
             </div>
@@ -64,18 +64,15 @@ export default function RightPanel(){
         return(
             <aside className="bg-zinc-800 h-full  overflow-y-hidden" style={{width:'20%' , position:'fixed' , top:'7.9%' , right:'0px'}}>
 
-            {/* first section where we have to select the app section it will be scrollable version */}
+            {/* first section where we have to select the app section  */}
                 <div className="bg-white/10  rounded-2xl mt-4 ml-2 mr-2  flex flex-col " style={{  height:'35vh'}}>
 
-                            <div className="text-zinc-300 text-bold flex justify-between items-start ml-2 pt-2 font-serif"> Apps / App Selector
-                        <Plus className="bg-zinc-300 p-1  mr-2 text-black rounded-2xl"/>
-
-                            </div>
+                            <div className="text-zinc-300 text-bold flex  items-start ml-2 pt-2 font-serif"> Apps / App Selector</div>
 
                     {/* App list Section */}
 
                     <div className="bg-black/25  overflow-y-auto scrollbar-visible h-full rounded-2xl mt-10 flex flex-col mx-2 mb-2 font-serif "   >
-                    {/* Created  a unordered list to store the app names */}
+                    
                        <AppList />
 
                     </div>

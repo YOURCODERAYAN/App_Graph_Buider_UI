@@ -11,12 +11,48 @@ import { useUIStore } from '../stores/uistore'
 import { useGraph } from '../hooks/useGraph'
 import {Trash} from 'lucide-react'
 import ServiceNode from './ServiceNode'
+import {useReactFlow} from 'reactflow'
 
 
 const nodeTypes = {
 
     serviceNode :ServiceNode
   }
+
+  {/* Fit View Trigger */}
+  function  FlowController(){
+
+      const {fitView} =   useReactFlow()
+      const {fitTriggerView} = useUIStore()
+
+
+        useEffect(()=>{
+
+          fitView({duration:300})
+        }, [fitTriggerView])
+
+
+        useEffect(()=>{
+
+            const handleSize = () => fitView({duration:300})
+
+        window. addEventListener('resize' , handleSize)
+        return () => window.removeEventListener('resize' , handleSize)
+          
+
+
+        }, [fitView])
+
+        return null
+
+  }
+
+
+
+
+
+
+
 
 export default function Canvas() {
 
@@ -33,7 +69,20 @@ export default function Canvas() {
     }
   }
 
-  
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if ((event.key === 'Delete' || event.key === 'Backspace') && selectedNode?.id) {
+        event.preventDefault()
+        deleteNode(selectedNode.id)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [deleteNode, selectedNode])
 
   useEffect(() => {
     if (data?.nodes) {
@@ -80,6 +129,7 @@ export default function Canvas() {
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%', background: '#1a1a1a' }}>
       <ReactFlow
+      
       nodeTypes={nodeTypes}
         nodes={nodes}
         edges={edges}
@@ -90,6 +140,7 @@ export default function Canvas() {
         zoomOnScroll={true}            
         fitView
       >
+        <FlowController />
         <Background 
           variant={BackgroundVariant.Dots} 
           gap={10} size={1} color="#cbd5e1" 
@@ -97,8 +148,8 @@ export default function Canvas() {
       </ReactFlow>
 
     <div className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2">
-      <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-700 bg-white shadow-lg cursor-pointer" onClick={HandleDelete}>
-        <Trash className="h-5 w-5 text-black" />
+      <div className="flex h-12  px-2  gap-1 items-center  flex-row justify-center rounded-lg border border-zinc-700 bg-red-700/60 shadow-lg cursor-pointer" onClick={HandleDelete}>
+      <span className="text-sm"> DeleteNode </span>   <Trash className="h-5 w-5 text-white" />
       </div>
     </div>
     </div>
