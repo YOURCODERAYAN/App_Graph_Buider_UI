@@ -1,73 +1,137 @@
-# React + TypeScript + Vite
+# Graph Builder UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A ReactFlow-based dashboard for visualizing and managing cloud infrastructure services as an interactive node graph. Built with React, TypeScript, ReactFlow, TanStack Query, and Zustand.
 
-Currently, two official plugins are available:
+![Status](https://img.shields.io/badge/status-active-success)
+![React](https://img.shields.io/badge/React-18-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+🔗 **Live Demo:** [your-deployed-link-here]
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- **Interactive Graph Canvas** — drag, zoom, pan, and connect service nodes using ReactFlow
+- **App Switching** — select between multiple applications, each with its own service graph
+- **Node Inspector Panel** — click any node to view and edit its details in a side panel
+- **Status Pills** — visual indicators for `Healthy`, `Degraded`, and `Down` service states
+- **Synced Slider + Input** — CPU limit control with a range slider and numeric input kept in sync
+- **Tabbed Inspector** — `Config` and `Runtime` tabs per node, with a live CPU usage bar chart
+- **Mock API Layer** — simulated network latency and loading/error states via TanStack Query
+- **Responsive Layout** — right panel collapses into a mobile slide-over drawer on small screens
+- **Delete Nodes** — remove a selected node via the `Delete`/`Backspace` key or a button
+- **Fit View** — manually re-center the graph, or have it auto-fit on window resize
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+| Category         | Tool                          |
+|-------------------|-------------------------------|
+| Framework         | React + TypeScript            |
+| Build Tool        | Vite                          |
+| Graph Visualization | ReactFlow (xyflow)           |
+| Data Fetching      | TanStack Query                |
+| State Management   | Zustand                       |
+| Styling            | Tailwind CSS                  |
+| Icons              | Lucide React                  |
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
+
+## 🚀 Setup Instructions
+
+### Prerequisites
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+# clone the repository
+git clone https://github.com/YOURCODERAYAN/App_Graph_Buider_UI.git
+cd App_Graph_Buider_UI
+
+# install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev         # start local dev server with hot reload
+npm run build        # type-check and build for production
+npm run preview      # preview the production build locally
+npm run lint          # run ESLint checks
+npm run typecheck     # run TypeScript type checking only
 ```
+
+The app will be available at `http://localhost:5173` by default.
+
+---
+
+## 📁 Project Structure
+
+```
+App_Graph_Buider_UI
+├─ eslint.config.js
+├─ index.html
+├─ package.json
+├─ public
+│  ├─ favicon.svg
+│  └─ icons.svg
+├─ README.md
+├─ src
+│  ├─ App.css
+│  ├─ App.tsx
+│  ├─ assets
+│  │  └─ vite.svg
+│  ├─ Components
+│  │  ├─ Canvas.tsx          # ReactFlow canvas, graph rendering
+│  │  ├─ CardUi.tsx           # Node inspector panel (Config/Runtime tabs)
+│  │  ├─ LeftRail.tsx         # Left icon navigation rail
+│  │  ├─ Navbar.tsx           # Top navbar (app name, Fit button)
+│  │  ├─ RightPanel.tsx       # App selector + inspector container
+│  │  └─ ServiceNode.tsx      # Custom ReactFlow node design
+│  ├─ hooks
+│  │  ├─ useApps.ts           # TanStack Query hook — fetches app list
+│  │  ├─ useGraph.ts          # TanStack Query hook — fetches graph per app
+│  │  └─ useMediaQuery.ts     # Responsive breakpoint hook
+│  ├─ index.css
+│  ├─ lib
+│  │  └─ mockApi.ts           # In-memory mock API with simulated latency
+│  ├─ main.tsx
+│  ├─ Pages
+│  │  └─ Home.tsx             # Main layout composition
+│  └─ stores
+│     └─ uistore.ts           # Zustand store — nodes, edges, selected app/node, drawer state
+├─ tsconfig.app.json
+├─ tsconfig.json
+├─ tsconfig.node.json
+└─ vite.config.ts
+```
+
+---
+
+## 🧠 Key Decisions
+
+- **Mock API via `setTimeout`, not MSW** — the task allowed either approach; `setTimeout`-wrapped promises were chosen for simplicity since no real network interception was required for this scope.
+- **Nodes and edges live fully in Zustand, not local ReactFlow state** — `Canvas` and `RightPanel` are sibling components with no direct parent-child relationship, so `nodes`, `edges`, `selectedAppId`, and `selectedNode` are all stored centrally in Zustand. `Canvas` writes the fetched graph into the store; `CardUi` (the inspector) reads and updates it directly via `updateNode` and `deleteNode` actions — avoiding prop drilling entirely.
+- **`updateNode` and `deleteNode` as Zustand actions** — both find the target node by `id` inside the store, update or remove it immutably, and also sync `selectedNode` so the inspector panel and the canvas node never fall out of sync after an edit or deletion.
+- **`queryKey: ['graph', appId]`** — including the app ID in the query key gives each app its own independent cache entry in TanStack Query, so switching back to a previously visited app renders instantly instead of refetching.
+- **Custom `ServiceNode` registered via `nodeTypes`** — kept as a stable reference outside the component to avoid unnecessary remounts on every render, which otherwise caused click handlers to misfire.
+- **CPU bar chart built with plain CSS, no chart library** — a set of `div` elements with randomized, capped heights was sufficient to visually represent load without adding a charting dependency.
+
+---
+
+## ⚠️ Known Limitations
+
+- The mock API has a randomized failure chance to simulate error states — refreshing may occasionally show an error card by design.
+- Node positions and edits are held in client-side state only; nothing persists after a page refresh.
+- The bar chart in the Runtime tab uses randomized values scaled by CPU percentage rather than real historical metrics.
+- Only one custom node type (`ServiceNode`) is implemented; all services share the same visual template.
+- Mobile drawer behavior is functional but canvas resizing on viewport changes may require clicking "Fit" rather than adjusting fully automatically in all cases.
+
+---
+
+
