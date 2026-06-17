@@ -2,11 +2,21 @@
 
 A ReactFlow-based dashboard for visualizing and managing cloud infrastructure services as an interactive node graph. Built with React, TypeScript, ReactFlow, TanStack Query, and Zustand.
 
-![Status](https://img.shields.io/badge/status-active-success)
-![React](https://img.shields.io/badge/React-18-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+<img width="1919" height="909" alt="image" src="https://github.com/user-attachments/assets/fc685ea6-f999-4d97-a23c-721782acba8f" />
 
-🔗 **Live Demo:** [your-deployed-link-here]
+
+![Status](https://img.shields.io/badge/status-active-success)
+![React](https://img.shields.io/badge/React-19-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Zustand](https://img.shields.io/badge/Zustand-blue)
+![TanStack Query](https://img.shields.io/badge/TanStackQuery-blue)
+![React Flow](https://img.shields.io/badge/ReactFlow-blue)
+
+
+
+
+
+🔗 **Live Demo:** []
 
 ---
 
